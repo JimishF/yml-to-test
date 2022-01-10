@@ -1,7 +1,7 @@
 {
   "name": "ymltotest",
 	"displayName": "ymltotest",
-	"description": "Convert yaml/yml to a it.todo test skeletons",
+	"description": "Convert yml to a it.todo test skeletons",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.63.0"
@@ -17,7 +17,7 @@
 		"commands": [
 			{
 				"command": "ymltotest.testify",
-				"title": "yml to Test: Convert Selection to Test skeleton"
+				"title": "yml to test: Convert Selection to Test skeleton"
 			}
 		]
 	},
