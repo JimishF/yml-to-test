@@ -37,10 +37,10 @@ export class Statement {
     }
 
     toString() {
-        if (this.typeName === 'todo') {
+        if (this.typeName === StatementType.todo) {
             return `it.todo('${this.title}');`;
         }
-        else if (this.typeName === 'describe') {
+        else if (this.typeName ===StatementType.describe) {
             const mappedChildren: string = this.children.reduce((acc, child) => acc + child.toString(), '');
             return `${describeStart(this.title)} ${mappedChildren} ${describeEnd()}`;
         }
