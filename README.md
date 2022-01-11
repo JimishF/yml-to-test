@@ -12,12 +12,22 @@ Convert yml to `describe()` and `it.todo()` / `it.skip()` test skeletons.
 ![demo](images/demo.gif?raw=true)
  
 
-## Default Extension Settings
+## Extension Settings
 
 ```js
+// Default settings
 {
     "ymltotest.testType": "jest" // Available: ["jest", "mocha"]`
     "ymltotest.autoReference": true 
 }
 ```
 
+### `ymltotest.testType`: 
+- Available Test Type Frameworks are `["jest", "mocha"]`
+- For `jest`, statement will be `it.todo('test description')` 
+- For `mocha`, statement will be `it.skip('test description')` 
+
+### `ymltotest.autoReference`:  
+- Enable Automatic referencing and force the use of string. 
+- If enabled, for a pattern `Given a FooBar`, it will converted to `describe(FooBar.name, ()=> { ... })`;
+- If disabled, it will keep the string as it is `describe('Given a FooBar', ()=> { ... })`;
