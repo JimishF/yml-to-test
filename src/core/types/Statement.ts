@@ -1,11 +1,17 @@
+
+export enum StatementType {
+    describe = 'describe',
+    todo = 'todo'
+}
+
 export interface TodoStatement {
-    typeName: 'todo',
+    typeName: StatementType.todo,
     title: string;
     children?: never
-
 }
+
 export interface DescribeStatement {
-    typeName: 'describe',
+    typeName: StatementType.describe,
     children: Statement[]
     title: string
 }
@@ -20,7 +26,7 @@ const describeEnd = () => `});`;
 
 
 export class Statement {
-    public readonly typeName: 'describe' | 'todo';
+    public readonly typeName: StatementType;
     public children: Statement[];
     public title: string;
 

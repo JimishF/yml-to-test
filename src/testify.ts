@@ -1,8 +1,8 @@
 import * as yaml from 'js-yaml';
 import * as vscode from 'vscode';
-import { transform } from './transform';
-import { Statement } from './types/Statement';
-import { buildFromStatements } from './build-from-statements';
+import { transform } from './core/transform';
+import { Statement } from './core/types/Statement';
+import { buildFromStatements } from './core/build-from-statements';
 import * as prettier from 'prettier';
 
 export const execute = (context: vscode.ExtensionContext) => {
@@ -17,6 +17,8 @@ export const execute = (context: vscode.ExtensionContext) => {
     let doc;
     try {
         doc = yaml.load(text);
+        console.log(doc);
+        
     } catch (e) {
         vscode.window.showInformationMessage("Invalid Yaml");
     }
