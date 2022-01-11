@@ -1,21 +1,27 @@
 import config from '../config.json';
+import { workspace } from 'vscode';
 
 export class Generator {
-    static type: string = config?.testType ?? 'jest';
+    static get config() {
+        const ymltotest = workspace.getConfiguration('ymltotest');
+        return {
+            testType: ymltotest.get('testType'),
+            autoReference: ymltotest.get('autoReference')
+        };
+    };
 
     private static attemptTitleToReference(title: string) {
         const referenceRegex = new RegExp(/given (a|an)?\s?(?<reference>[A-Z][a-z\d]+)+$/gi);
         const match = referenceRegex.exec(title);
         const ref = match?.groups?.reference;
         if (ref) {
-            return `${ref}.prototype.name`;
+            return `${ref}.name`;
         }
         return `'${title}'`;
     };
 
     private static get todoFnName() {
-
-        switch (this.type) {
+        switch (this.config.testType) {
             case 'jest':
                 return '.todo';
             case 'mocha':
@@ -26,8 +32,10 @@ export class Generator {
     }
 
     private static describeStart = (title: string) => {
-        if (!config?.disableAutoReference) {
+        if (this.config.autoReference) {
             title = this.attemptTitleToReference(title);
+        }else{
+            title = `'${title}'`;
         }
         return `describe(${title}, ()=> {`;
     };

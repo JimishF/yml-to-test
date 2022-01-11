@@ -22,7 +22,7 @@ export const execute = (context: ExtensionContext) => {
     const statements = transform(doc);
     const str = buildFromStatements(statements);
     try {
-        const formattedStr = format(str);
+        const formattedStr = format(str, { parser:'babel'});
         
         // replace
         editor.edit(builder => {

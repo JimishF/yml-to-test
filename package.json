@@ -1,8 +1,8 @@
 {
   "name": "ymltotest",
 	"displayName": "Yml to Test",
-	"description": "Convert yml to a it.todo test skeletons",
-	"version": "0.0.1",
+	"description": "Convert yml to `describe-it` test skeletons",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.63.0"
 	},
@@ -24,7 +24,26 @@
 				"command": "ymltotest.testify",
 				"title": "YML to test: Selection to Test skeleton"
 			}
-		]
+		],
+		"configuration": {
+			"title": "Yml To Test",
+			"properties": {
+				"ymltotest.testType": {
+					"title" : "TestType",
+					"description": "Select your Test Framework type",
+					"type":"string",
+					"default": "jest",
+					"enum": ["jest", "mocha"]
+				},
+				"ymltotest.autoReference": {
+					"title" : "autoReference",
+					"description": "Enable Automatic referencing and force the use of string. (Default behavior `Given a FooBar` to a FooBar.name)",
+					"type":"boolean",
+					"default": true
+				}
+			}
+
+		}
 	},
 	"keywords": [
 		"yml to jest",

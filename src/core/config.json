@@ -1,4 +1,4 @@
 {
     "testType": "jest",
-    "disableAutoReference": false
+    "autoReference": true
 }
