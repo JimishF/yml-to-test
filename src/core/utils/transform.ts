@@ -1,4 +1,4 @@
-import { Statement, StatementType } from './types/Statement';
+import { Statement, StatementType } from '../types/statement';
 
 export const transform = (data: any): Statement[] => {
     let children: Statement[] = [];

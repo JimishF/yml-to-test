@@ -1,10 +1,10 @@
-import config from './config.json';
+import config from '../config.json';
 
 export class Generator {
     static type: string = config?.testType ?? 'jest';
 
     private static attemptTitleToReference(title: string) {
-        const referenceRegex = new RegExp(/given (a|an)?\s?(?<reference>[A-Z][a-z\d]+)+/gi);
+        const referenceRegex = new RegExp(/given (a|an)?\s?(?<reference>[A-Z][a-z\d]+)+$/gi);
         const match = referenceRegex.exec(title);
         const ref = match?.groups?.reference;
         if (ref) {

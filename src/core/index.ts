@@ -1,3 +1,3 @@
-export * from './transform';
-export * from './build-from-statements';
-export * from './types/Statement';
+export * from './utils/transform';
+export * from './utils/build-from-statements';
+export * from './types/statement';

@@ -1,29 +1,28 @@
-import * as yaml from 'js-yaml';
-import * as vscode from 'vscode';
-import { transform } from './core/transform';
-import { Statement } from './core/types/Statement';
-import { buildFromStatements } from './core/build-from-statements';
-import * as prettier from 'prettier';
+import { load } from 'js-yaml';
+import { window, ExtensionContext } from 'vscode';
+import { transform } from './core/utils/transform';
+import { buildFromStatements } from './core/utils/build-from-statements';
+import { format } from 'prettier';
 
-export const execute = (context: vscode.ExtensionContext) => {
-    const editor = vscode.window.activeTextEditor!;
+export const execute = (context: ExtensionContext) => {
+    const editor = window.activeTextEditor!;
 
     const text = editor.document.getText(editor.selection);
     if (!text) {
-        vscode.window.showInformationMessage("Select Text and run again.");
+        window.showInformationMessage("Select Text and run again.");
         return;
     }
 
     let doc;
     try {
-        doc = yaml.load(text);
+        doc = load(text);
     } catch (e) {
-        vscode.window.showInformationMessage("Invalid Yaml");
+        window.showInformationMessage("Invalid Yaml");
     }
     const statements = transform(doc);
     const str = buildFromStatements(statements);
     try {
-        const formattedStr = prettier.format(str);
+        const formattedStr = format(str);
         
         // replace
         editor.edit(builder => {
@@ -34,7 +33,7 @@ export const execute = (context: vscode.ExtensionContext) => {
 
     } catch (error) {
         console.log(error);
-        vscode.window.showErrorMessage("Prettification failed");
+        window.showErrorMessage("Prettification failed");
 
     }
 };

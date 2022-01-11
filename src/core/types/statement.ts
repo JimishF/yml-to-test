@@ -1,4 +1,4 @@
-import { Generator } from '../config-provider';
+import { Generator } from '../utils/generator';
 
 export enum StatementType {
     describe = 'describe',
