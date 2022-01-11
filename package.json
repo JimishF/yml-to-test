@@ -22,7 +22,7 @@
 		"commands": [
 			{
 				"command": "ymltotest.testify",
-				"title": "YML to test: Convert Selection to Test skeleton"
+				"title": "YML to test: Selection to Test skeleton"
 			}
 		]
 	},
