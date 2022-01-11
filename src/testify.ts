@@ -17,8 +17,7 @@ export const execute = (context: vscode.ExtensionContext) => {
     let doc;
     try {
         doc = yaml.load(text);
-        console.log(doc);
-        
+
     } catch (e) {
         vscode.window.showInformationMessage("Invalid Yaml");
     }

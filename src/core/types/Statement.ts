@@ -17,9 +17,20 @@ export interface DescribeStatement {
 }
 export type StatementOptions = TodoStatement | DescribeStatement;
 
-const describeStart = (title: string) => {
+const attemptTitleToReference = (title: string) => {
     //TODO: try to check if title is className or function name like, and decide on double quotes 
-    return `describe('${title}', ()=> {`;
+    const referenceRegex = new RegExp(/given (a|an)?\s?(?<reference>[A-Z][a-z\d]+)+/gi);
+    const match = referenceRegex.exec(title);
+    const ref = match?.groups?.reference;
+    if (ref) {
+        return `${ref}.prototype.name`;
+    }
+    return `'${title}'`;
+};
+
+const describeStart = (title: string) => {
+    title = attemptTitleToReference(title);
+    return `describe(${title}, ()=> {`;
 };
 
 const describeEnd = () => `});`;
@@ -40,7 +51,7 @@ export class Statement {
         if (this.typeName === StatementType.todo) {
             return `it.todo('${this.title}');`;
         }
-        else if (this.typeName ===StatementType.describe) {
+        else if (this.typeName === StatementType.describe) {
             const mappedChildren: string = this.children.reduce((acc, child) => acc + child.toString(), '');
             return `${describeStart(this.title)} ${mappedChildren} ${describeEnd()}`;
         }
