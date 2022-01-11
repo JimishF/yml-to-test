@@ -37,6 +37,7 @@
 		"jest",
 		"mocha"
 	],
+	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/JimishF/yml-to-test"
@@ -44,8 +45,7 @@
 	"bugs": {
 		"url": "https://github.com/JimishF/yml-to-test/issues"
 	},
-	"icon": "./images/logo.png",
-
+	"icon": "images/logo.png",
 	"scripts": {
 		"vscode:prepublish": "yarn run package",
 		"compile": "webpack",
