@@ -1,4 +1,4 @@
 {
-    "testType": "mocha",
+    "testType": "jest",
     "disableAutoReference": false
 }
