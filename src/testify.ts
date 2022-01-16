@@ -13,28 +13,33 @@ export const execute = (context: ExtensionContext) => {
         return;
     }
 
+
     let doc;
     try {
         doc = load(text);
     } catch (e) {
         window.showInformationMessage("Invalid Yaml");
+        return;
     }
+
     const statements = transform(doc);
     const str = buildFromStatements(statements);
+
+    let formattedStr: string;
     try {
-        const formattedStr = format(str, { parser:'babel'});
-        
-        // replace
-        editor.edit(builder => {
-            for (const selection of editor.selections) {
-                builder.replace(selection, formattedStr);
-            }
-        });
-
+        formattedStr = format(str, { parser: 'babel' });
     } catch (error) {
-        console.log(error);
         window.showErrorMessage("Prettification failed");
-
+        return;
     }
+
+
+    // replace
+    editor.edit(builder => {
+        for (const selection of editor.selections) {
+            builder.replace(selection, formattedStr);
+        }
+    });
+
 };
 

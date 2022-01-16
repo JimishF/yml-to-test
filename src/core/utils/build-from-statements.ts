@@ -1,9 +1,12 @@
+import { getConfig } from "../config";
 import { Statement } from "../types/statement";
+import { TemplateAgent } from "./template-agent";
 
 export const buildFromStatements = (statementOrStatements: Statement | Statement[]): string => {
-    if (!Array.isArray(statementOrStatements)) {
-        statementOrStatements = [statementOrStatements];
-    }
+    let statements: Statement[] = Array.isArray(statementOrStatements) ? statementOrStatements : [statementOrStatements];
 
-    return statementOrStatements.reduce((output, statement) => output += statement.toString(), '');
+    const config = getConfig();
+    const templateAgent = new TemplateAgent(config);
+
+    return statements.reduce((output, statement) => output += statement.toString(templateAgent), '');
 };

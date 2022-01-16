@@ -1,4 +1,4 @@
-import { Generator } from '../utils/generator';
+import { TemplateAgent } from '../utils/template-agent';
 
 export enum StatementType {
     describe = 'describe',
@@ -28,13 +28,13 @@ export class Statement {
         this.title = statementOptions.title;
     }
 
-    toString() {
+    toString(templateAgent: TemplateAgent) {
         if (this.typeName === StatementType.todo) {
-            return Generator.it(this.title);
+            return templateAgent.it(this.title);
         }
         else if (this.typeName === StatementType.describe) {
-            const mappedChildren: string = this.children.reduce((acc, child) => acc + child.toString(), '');
-            return Generator.describe(this.title, mappedChildren);
+            const mappedChildren: string = this.children.reduce((acc, child) => acc + child.toString(templateAgent), '');
+            return templateAgent.describe(this.title, mappedChildren);
         }
     }
 }
